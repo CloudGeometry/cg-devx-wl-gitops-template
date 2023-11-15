@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "<WL_SERVICE_NAME>-deployment"
+  annotations:
+    <K8S_ROLE_MAPPING>: "<WL_IAM_ROLE_RN>"
+  labels: {
+    # <ADDITIONAL_LABELS>
+  }
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "<WL_SERVICE_NAME>-app"
+  template:
+    metadata:
+      labels:
+        app: "<WL_SERVICE_NAME>-app"
+    spec:
+      containers:
+      - name: "<WL_SERVICE_NAME>-container"
+        imagePullPolicy: IfNotPresent
+        image: "<WL_SERVICE_IMAGE>:<WL_SERVICE_VERSION>"
+        livenessProbe:
+          httpGet:
+            path: /livez
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 1
+          timeoutSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          timeoutSeconds: 30
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 100m
+            memory: "128Mi"
+          requests:
+            cpu: 40m
+            memory: "64Mi"

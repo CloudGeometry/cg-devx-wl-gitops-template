@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: sta
+namePrefix: sta-
+
+resources:
+- ../../base
+- ingress.yaml
+- cm.yaml
+- external-secrets.yaml
+
+components:
+- ../../variants/uat
+
+patches:
+- path: deployment.yaml
+- path: version.yaml
+- path: settings.yaml
+
