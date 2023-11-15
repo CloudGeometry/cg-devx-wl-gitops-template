@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: prod
+namePrefix: prod-
+
+resources:
+- ../../base
+- ingress.yaml
+- cm.yaml
+- external-secrets.yaml
+
+components:
+- ../../variants/prod
+
+patches:
+- path: deployment.yaml
+- path: version.yaml
+- path: settings.yaml
+

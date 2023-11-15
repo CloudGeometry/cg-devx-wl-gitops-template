@@ -1,0 +1,13 @@
+---
+# Defines common characteristics between environments
+# Mostly static business settings that will not be promoted between environments
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "<WL_SERVICE_NAME>-deployment"
+spec:
+  template:
+    spec:
+      containers:
+      - name: webserver-simple
+        env: []

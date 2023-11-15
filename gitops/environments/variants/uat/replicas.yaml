@@ -1,0 +1,8 @@
+---
+# Kubernetes specific settings replicas override only!
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "<WL_SERVICE_NAME>-deployment"
+spec:
+  replicas: 3
