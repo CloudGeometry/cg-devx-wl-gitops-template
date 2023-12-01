@@ -3,13 +3,9 @@ kind: Ingress
 metadata:
   name: "<WL_SERVICE_NAME>"
   annotations:
+# change issuer to letsencrypt-prod if you want aviod untrusted cert, but be sure that you woudn't hit rate limits - https://letsencrypt.org/docs/staging-environment/
     cert-manager.io/cluster-issuer: letsencrypt-staging
     kubernetes.io/ingress.class: nginx
-    kubernetes.io/tls-acme: 'true'
-    nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
-    # If you encounter a redirect loop or are getting a 307 response code
-    # then you need to force the nginx ingress to connect to the backend using HTTPS.
-    nginx.ingress.kubernetes.io/backend-protocol: 'HTTPS'
 spec:
   rules:
     - host: "dev-<WL_SERVICE_URL>"
@@ -21,7 +17,8 @@ spec:
               service:
                 name: "<WL_SERVICE_NAME>"
                 port:
-                  name: https
+                  name: http
   tls:
     - hosts:
         - "dev-<WL_SERVICE_URL>"
+      secretName: <WL_SERVICE_NAME>-dev-tls

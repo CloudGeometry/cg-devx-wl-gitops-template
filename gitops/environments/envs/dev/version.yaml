@@ -3,7 +3,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "<WL_SERVICE_NAME>-deployment"
+  name: "<WL_SERVICE_NAME>"
 spec:
   template:
     spec:
