@@ -4,12 +4,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "<WL_SERVICE_NAME>-deployment"
+  name: "<WL_SERVICE_NAME>"
 spec:
   template:
     spec:
       containers:
-      - name: webserver-simple
+      - name: "<WL_SERVICE_NAME>-container"
         livenessProbe:
           httpGet:
             path: /livez
@@ -35,6 +35,3 @@ spec:
           requests:
             cpu: 40m
             memory: "1024Mi"
-      nodeSelector: {}
-      affinity: {}
-      tolerations: []
