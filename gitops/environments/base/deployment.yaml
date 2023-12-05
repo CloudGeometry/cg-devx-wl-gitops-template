@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "<WL_SERVICE_NAME>-deployment"
+  name: "<WL_SERVICE_NAME>"
   annotations:
-    <K8S_ROLE_MAPPING>: "<WL_IAM_ROLE_RN>"
+    # <K8S_ROLE_MAPPING>: "<WL_IAM_ROLE_RN>"
   labels: {
     # <ADDITIONAL_LABELS>
   }
@@ -19,6 +19,7 @@ spec:
       labels:
         app: "<WL_SERVICE_NAME>-app"
     spec:
+      serviceAccountName: <WL_SERVICE_NAME>
       containers:
       - name: "<WL_SERVICE_NAME>-container"
         imagePullPolicy: IfNotPresent
@@ -42,7 +43,9 @@ spec:
           failureThreshold: 3
           timeoutSeconds: 30
         ports:
-        - containerPort: 8080
+          - name: http
+            containerPort: <WL_SERVICE_NAME_PORT>
+            protocol: TCP
         resources:
           limits:
             cpu: 100m
