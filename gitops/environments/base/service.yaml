@@ -8,6 +8,6 @@ spec:
     app: "<WL_SERVICE_NAME>-app"
   ports:
     - protocol: TCP
-      port: <WL_SERVICE_NAME_PORT>
+      port: <WL_SERVICE_PORT>
       targetPort: http
       name: http

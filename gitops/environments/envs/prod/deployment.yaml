@@ -8,5 +8,3 @@ spec:
     spec:
       containers:
       - name: "<WL_SERVICE_NAME>-container"
-        env: []
-      
