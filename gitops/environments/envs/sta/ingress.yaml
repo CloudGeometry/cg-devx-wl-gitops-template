@@ -22,4 +22,4 @@ spec:
   tls:
     - hosts:
         - "sta-<WL_SERVICE_URL>"
-      secretName: <WL_SERVICE_NAME>-sta-tls
+      secretName: <WL_SERVICE_NAME>-tls

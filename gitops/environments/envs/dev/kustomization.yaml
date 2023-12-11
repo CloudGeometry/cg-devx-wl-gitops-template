@@ -1,8 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-nameSuffix: -dev
-
 resources:
 - ../../base
 - ingress.yaml
@@ -16,6 +14,3 @@ patches:
 - path: deployment.yaml
 - path: version.yaml
 - path: settings.yaml
-
-configurations:
-- ./kustomizeconfig/skip-cm-suffix.yaml

@@ -20,4 +20,4 @@ spec:
   tls:
     - hosts:
         - "<WL_SERVICE_URL>"
-      secretName: <WL_SERVICE_NAME>-prod-tls
+      secretName: <WL_SERVICE_NAME>-tls
