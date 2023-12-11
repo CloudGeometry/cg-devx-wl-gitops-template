@@ -9,8 +9,3 @@ spec:
       containers:
       - name: "<WL_SERVICE_NAME>-container"
         env: []
-        envFrom:
-          - configMapRef:
-              name: "<WL_SERVICE_NAME>"
-          - secretRef:
-              name: "<WL_SERVICE_NAME>"
