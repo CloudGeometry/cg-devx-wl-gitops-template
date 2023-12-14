@@ -7,4 +7,8 @@ terraform {
 # <TF_HOSTING_PROVIDER>
 
 locals {
+  tags = {
+    Workload   = "<WL_NAME>"
+    ProvisionedBy = "CGDevX"
+  }
 }
