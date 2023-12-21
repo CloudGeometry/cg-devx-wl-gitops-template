@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 
-patches:
-- path: prod.yaml
-- path: replicas.yaml
-- path: settings.yaml
+patchesStrategicMerge:
+- prod.yaml
+- replicas.yaml
+- settings.yaml

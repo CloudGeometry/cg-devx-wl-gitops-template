@@ -10,7 +10,7 @@ resources:
 components:
 - ../../variants/dev
 
-patches:
-- path: deployment.yaml
-- path: version.yaml
-- path: settings.yaml
+patchesStrategicMerge:
+- deployment.yaml
+- version.yaml
+- settings.yaml

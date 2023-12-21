@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
   name: "<WL_SERVICE_NAME>"
   annotations: {
+    reloader.stakater.com/auto: "true",
     # <K8S_ROLE_MAPPING>: "<WL_IAM_ROLE_RN>"
   }
   labels: {
@@ -21,6 +22,8 @@ spec:
         app: "<WL_SERVICE_NAME>-app"
     spec:
       serviceAccountName: <WL_SERVICE_NAME>
+      imagePullSecrets:
+        - name: docker-config
       containers:
         - name: "<WL_SERVICE_NAME>-container"
           envFrom:
