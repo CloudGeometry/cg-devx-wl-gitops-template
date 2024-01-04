@@ -1,0 +1,69 @@
+---
+# Promote a GitOps workload from one environment to the next
+name: Promote workload using Github Actions only
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      source_env:
+        description: Source environment
+        required: true
+        default: dev
+        type: choice
+        options: [dev, sta, prod]
+      target_env:
+        description: Target environment
+        required: true
+        default: sta
+        type: choice
+        options: [dev, sta, prod]
+      promote_container:
+        description: Promote container tag
+        required: true
+        type: boolean
+        default: 'true'
+      promote_configmaps:
+        description: Also promote configmap settings
+        required: true
+        type: boolean
+      promote_settings:
+        description: Also promote workload settings
+        required: true
+        type: boolean
+      messsage:
+        description: Commit message
+        required: true
+        type: string
+        default: workload promotion
+jobs:
+  promote:
+    # The type of runner that the job will run on
+    runs-on:
+      group: <GIT_RUNNER_GROUP_NAME>
+      labels: self-hosted
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      - name: Copy container tag
+        if: ${{ inputs.promote_container }}
+        uses: canastro/copy-file-action@master
+        with:
+          source: gitops/environments/envs/${{ inputs.source_env }}/version.yaml
+          target: gitops/environments/envs/${{ inputs.target_env }}/version.yaml
+      - name: Copy configmaps
+        if: ${{ inputs.promote_configmaps }}
+        uses: canastro/copy-file-action@master
+        with:
+          source: gitops/environments/envs/${{ inputs.source_env }}/cm.yaml
+          target: gitops/environments/envs/${{ inputs.target_env }}/cm.yaml
+      - name: Copy settings
+        if: ${{ inputs.promote_settings }}
+        uses: canastro/copy-file-action@master
+        with:
+          source: gitops/environments/envs/${{ inputs.source_env }}/settings.yaml
+          target: gitops/environments/envs/${{ inputs.target_env }}/settings.yaml
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: ${{ inputs.messsage }}
+

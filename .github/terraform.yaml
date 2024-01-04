@@ -5,7 +5,9 @@ on:
 jobs:
   terraform-actions:
     name: Workflow
-    runs-on: ubuntu-latest
+    runs-on:
+      group: <GIT_RUNNER_GROUP_NAME>
+      labels: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: Setup Terraform
