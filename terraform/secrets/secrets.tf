@@ -4,6 +4,7 @@ resource "vault_generic_secret" "<WL_NAME>_<WL_SERVICE_NAME>-dev" {
   # note: do not hardcode passwords in git under normal circumstances.
   data_json = <<EOT
 {
+  "secret_key": "dev env secret value placeholder"
 }
 EOT
 
@@ -20,6 +21,7 @@ resource "vault_generic_secret" "<WL_NAME>_<WL_SERVICE_NAME>-sta" {
   # note: do not hardcode passwords in git under normal circumstances.
   data_json = <<EOT
 {
+  "secret_key": "sta env secret value placeholder"
 }
 EOT
 
@@ -36,6 +38,7 @@ resource "vault_generic_secret" "<WL_NAME>_<WL_SERVICE_NAME>-prod" {
   # note: do not hardcode passwords in git under normal circumstances.
   data_json = <<EOT
 {
+  "secret_key": "prod env secret value placeholder"
 }
 EOT
 
