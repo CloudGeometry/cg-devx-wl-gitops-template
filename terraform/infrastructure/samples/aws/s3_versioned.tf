@@ -1,27 +1,25 @@
 # AWS S3 bucket with versioning
-# For more details please see official provider documentation https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
+# For more details please see official provider documentation https://registry.terraform.io/modules/terraform-aws-modules/s3-bucket/aws/latest
 
-# random suffix for artifacts s3 bucket
-resource "random_string" "random_suffix" {
-  length  = 8
-  lower   = true
-  upper   = false
-  special = false
-}
+module "s3_bucket" {
+  source = "terraform-aws-modules/s3-bucket/aws"
 
-# s3 bucket
-resource "aws_s3_bucket" "example" {
-  bucket = "example-bucket-${random_string.random_suffix.id}"
+  bucket = "<WL_NAME>-example-bucket"
 
-  tags = {
-    Name        = "My example bucket"
+  versioning = {
+    enabled = true
+  }
+
+  server_side_encryption_configuration = {
+    rule = {
+      apply_server_side_encryption_by_default = {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+
+  tags = merge(local.tags, {
+    Name        = "<WL_NAME>-example-bucket",
     Environment = "dev"
-  }
-}
-
-resource "aws_s3_bucket_versioning" "versioning_example" {
-  bucket = aws_s3_bucket.example.id
-  versioning_configuration {
-    status = "Enabled"
-  }
+  })
 }
