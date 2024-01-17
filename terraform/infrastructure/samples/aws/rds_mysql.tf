@@ -9,8 +9,8 @@ module "db_mysql" {
   allocated_storage = 5
   storage_encrypted = true
 
-  db_name  = "<WL_NAME>demodb" # DBName must begin with a letter and contain only alphanumeric characters
-  username = "<WL_NAME>user"
+  db_name  = "demodb" # DBName must begin with a letter and contain only alphanumeric characters
+  username = "demouser"
   port     = "3306"
 
   iam_database_authentication_enabled = true
