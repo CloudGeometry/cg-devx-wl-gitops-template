@@ -18,21 +18,21 @@ data "aws_vpc" "current_vpc" {
 data "aws_subnet" "intra_subnet_1a" {
   filter {
     name   = "tag:Name"
-    values = ["<CLUSTER_NAME>-vpc-intra-eu-west-1a"]
+    values = ["<CLUSTER_NAME>-vpc-intra-<CLOUD_REGION>a"]
   }
 }
 
 data "aws_subnet" "intra_subnet_1b" {
   filter {
     name   = "tag:Name"
-    values = ["<CLUSTER_NAME>-vpc-intra-eu-west-1b"]
+    values = ["<CLUSTER_NAME>-vpc-intra-<CLOUD_REGION>b"]
   }
 }
 
 data "aws_subnet" "intra_subnet_1c" {
   filter {
     name   = "tag:Name"
-    values = ["<CLUSTER_NAME>-vpc-intra-eu-west-1c"]
+    values = ["<CLUSTER_NAME>-vpc-intra-<CLOUD_REGION>c"]
   }
 }
 
