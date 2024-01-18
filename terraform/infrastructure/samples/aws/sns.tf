@@ -1,4 +1,4 @@
-# AWS S3 bucket with versioning
+# AWS SNS
 # For more details please see official provider documentation https://registry.terraform.io/modules/terraform-aws-modules/sns/aws/latest
 
 module "sns_topic" {
