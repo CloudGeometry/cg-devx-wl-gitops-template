@@ -1,3 +1,6 @@
+# AWS RDS MySQL
+# For more details please see official provider documentation https://registry.terraform.io/modules/terraform-aws-modules/rds/aws/latest
+
 module "db_mysql" {
   source = "terraform-aws-modules/rds/aws"
 
