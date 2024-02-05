@@ -44,13 +44,16 @@ spec:
         tasks:
           - name: promote
             templateRef:
-              name: promote-wft
+              name: promote-cwft
               template: promote
+              clusterScope: true
     - name: exit-handler
       container:
         image: '{{workflow.parameters.dockerhub-registry-proxy}}/library/alpine'
         imagePullPolicy: IfNotPresent
-        command: [sh, -c]
+        command:
+          - sh
+          - -c
         args:
           - 'echo Promote Workflow execution status: {{workflow.name}} {{workflow.status}}
             {{workflow.duration}}'
