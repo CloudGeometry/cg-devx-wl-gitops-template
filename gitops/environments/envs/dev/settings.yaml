@@ -3,10 +3,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "<WL_SERVICE_NAME>"
+  name: <WL_SERVICE_NAME>
 spec:
   template:
     spec:
       containers:
-      - name: "<WL_SERVICE_NAME>-container"
-        env: []
+        - name: <WL_SERVICE_NAME>-container
+          env: []
+

@@ -1,7 +1,8 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "<WL_SERVICE_NAME>"
+  name: <WL_SERVICE_NAME>
   annotations:
     # change issuer to letsencrypt-prod if you want to avoid untrusted cert,
     # but be sure that you wouldn't hit rate limits - https://letsencrypt.org/docs/staging-environment/
@@ -9,17 +10,17 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-    - host: "dev-<WL_SERVICE_URL>"
+    - host: dev-<WL_SERVICE_URL>
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: "<WL_SERVICE_NAME>"
+                name: <WL_SERVICE_NAME>
                 port:
                   name: http
   tls:
     - hosts:
-        - "dev-<WL_SERVICE_URL>"
+        - dev-<WL_SERVICE_URL>
       secretName: <WL_SERVICE_NAME>-tls

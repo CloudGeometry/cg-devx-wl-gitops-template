@@ -25,7 +25,7 @@ spec:
         value: ''
   entrypoint: promote-seq
   imagePullSecrets:
-    - name: docker-config
+    - name: proxy-docker-config
   onExit: exit-handler
   volumes:
     - name: ssh-key-vol
@@ -34,7 +34,7 @@ spec:
         defaultMode: 256
     - name: kaniko-secret
       secret:
-        secretName: docker-config
+        secretName: proxy-docker-config
         items:
           - key: .dockerconfigjson
             path: config.json
@@ -44,13 +44,16 @@ spec:
         tasks:
           - name: promote
             templateRef:
-              name: promote-wft
+              name: promote-cwft
               template: promote
+              clusterScope: true
     - name: exit-handler
       container:
         image: '{{workflow.parameters.dockerhub-registry-proxy}}/library/alpine'
         imagePullPolicy: IfNotPresent
-        command: [sh, -c]
+        command:
+          - sh
+          - -c
         args:
           - 'echo Promote Workflow execution status: {{workflow.name}} {{workflow.status}}
             {{workflow.duration}}'
