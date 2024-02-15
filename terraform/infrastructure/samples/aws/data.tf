@@ -38,7 +38,12 @@ data "aws_subnet" "intra_subnet_1c" {
 
 data "aws_security_group" "cluster_additional_sg" {
   vpc_id = data.aws_vpc.current_vpc.id
-  tags = {
-    Name = "<CLUSTER_NAME>-cluster"
+  filter {
+    name = "tag:kubernetes.io/cluster/<CLUSTER_NAME>"
+    values = ["owned"]
+  }
+  filter {
+    name = "tag:aws:eks:cluster-name"
+    values = ["<CLUSTER_NAME>"]
   }
 }
