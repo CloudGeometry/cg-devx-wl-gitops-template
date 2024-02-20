@@ -3,7 +3,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
   generateName: promote-wf
-  namespace: argo
 spec:
   arguments:
     parameters:

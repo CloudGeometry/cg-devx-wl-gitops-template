@@ -40,7 +40,7 @@ on:
         default: workload promotion
 env:
   REPO_NAME: ${{ github.repository }}
-  ARGO_NAMESPACE: argo
+  ARGO_NAMESPACE: wl-<WL_NAME>-dev
 jobs:
   promote:
     # The type of runner that the job will run on
@@ -73,4 +73,5 @@ jobs:
             -p promote-settings=${{inputs.promote_settings}} \
             -p promote-configmaps=${{inputs.promote_configmaps}} \
             -p commit-message=\""${{ inputs.commit_message }}"\" \
+            --serviceaccount argo-workflow \
             --wait --log
