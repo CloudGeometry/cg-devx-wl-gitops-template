@@ -4,13 +4,14 @@
 module "db_postgresql" {
   source = "terraform-aws-modules/rds/aws"
 
-  identifier = "<WL_NAME>-demodb"
+  identifier = "${local.wl_name}-demodb"
 
   engine            = "postgres"
   engine_version    = "15.4"
   instance_class    = "db.t3.small"
   allocated_storage = 5
   storage_encrypted = true
+  auto_minor_version_upgrade  = false
 
   db_name  = "demodb" # DBName must begin with a letter and contain only alphanumeric characters
   username = "demoadmin"

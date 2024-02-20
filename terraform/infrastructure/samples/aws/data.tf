@@ -1,49 +1,39 @@
 data "aws_vpc" "current_vpc" {
   filter {
     name   = "tag:Name"
-    values = ["<CLUSTER_NAME>-vpc"]
+    values = ["${local.cluster_name}-vpc"]
   }
 }
-
-# data "aws_subnets" "intra_subnets" {
-#   filter {
-#     name   = "vpc-id"
-#     values = [data.aws_vpc.vpc_id]
-#   }
-#   tags = {
-#     Tier = "Intra"
-#   }
-# }
 
 data "aws_subnet" "intra_subnet_1a" {
   filter {
     name   = "tag:Name"
-    values = ["<CLUSTER_NAME>-vpc-intra-<CLOUD_REGION>a"]
+    values = ["${local.cluster_name}-vpc-intra-${local.region}a"]
   }
 }
 
 data "aws_subnet" "intra_subnet_1b" {
   filter {
     name   = "tag:Name"
-    values = ["<CLUSTER_NAME>-vpc-intra-<CLOUD_REGION>b"]
+    values = ["${local.cluster_name}-vpc-intra-${local.region}b"]
   }
 }
 
 data "aws_subnet" "intra_subnet_1c" {
   filter {
     name   = "tag:Name"
-    values = ["<CLUSTER_NAME>-vpc-intra-<CLOUD_REGION>c"]
+    values = ["${local.cluster_name}-vpc-intra-${local.region}c"]
   }
 }
 
 data "aws_security_group" "cluster_additional_sg" {
   vpc_id = data.aws_vpc.current_vpc.id
   filter {
-    name = "tag:kubernetes.io/cluster/<CLUSTER_NAME>"
+    name = "tag:kubernetes.io/cluster/${local.cluster_name}"
     values = ["owned"]
   }
   filter {
     name = "tag:aws:eks:cluster-name"
-    values = ["<CLUSTER_NAME>"]
+    values = ["${local.cluster_name}"]
   }
 }

@@ -1,6 +1,6 @@
 # dev environment secrets template
-resource "vault_generic_secret" "<WL_NAME>_<WL_SERVICE_NAME>-dev" {
-  path      = "workloads/<WL_NAME>/dev/<WL_SERVICE_NAME>"
+resource "vault_generic_secret" "<WL_SERVICE_NAME>-dev" {
+  path      = "workloads/${local.wl_name}/dev/<WL_SERVICE_NAME>"
   # note: do not hardcode passwords in git under normal circumstances.
   data_json = <<EOT
 {
@@ -16,8 +16,8 @@ EOT
 }
 
 # staging environment secrets template
-resource "vault_generic_secret" "<WL_NAME>_<WL_SERVICE_NAME>-sta" {
-  path      = "workloads/<WL_NAME>/sta/<WL_SERVICE_NAME>"
+resource "vault_generic_secret" "<WL_SERVICE_NAME>-sta" {
+  path      = "workloads/${local.wl_name}/sta/<WL_SERVICE_NAME>"
   # note: do not hardcode passwords in git under normal circumstances.
   data_json = <<EOT
 {
@@ -33,8 +33,8 @@ EOT
 }
 
 # prod environment secrets template
-resource "vault_generic_secret" "<WL_NAME>_<WL_SERVICE_NAME>-prod" {
-  path      = "workloads/<WL_NAME>/prod/<WL_SERVICE_NAME>"
+resource "vault_generic_secret" "<WL_SERVICE_NAME>-prod" {
+  path      = "workloads/${local.wl_name}/prod/<WL_SERVICE_NAME>"
   # note: do not hardcode passwords in git under normal circumstances.
   data_json = <<EOT
 {
