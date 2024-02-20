@@ -17,7 +17,7 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 5
           successThreshold: 1
-          failureThreshold: 1
+          failureThreshold: 3
           timeoutSeconds: 30
         readinessProbe:
           httpGet:
@@ -25,13 +25,13 @@ spec:
             port: http
           initialDelaySeconds: 10
           periodSeconds: 5
-          successThreshold: 1
+          successThreshold: 2
           failureThreshold: 3
           timeoutSeconds: 30
         resources:
           limits:
-            cpu: 100m
-            memory: "2048Mi"
+            cpu: 200m
+            memory: "512Mi"
           requests:
-            cpu: 40m
-            memory: "1024Mi"
+            cpu: 80m
+            memory: "256Mi"
