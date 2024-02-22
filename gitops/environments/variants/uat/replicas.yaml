@@ -5,4 +5,4 @@ kind: Deployment
 metadata:
   name: "<WL_SERVICE_NAME>"
 spec:
-  replicas: 3
+  replicas: 1

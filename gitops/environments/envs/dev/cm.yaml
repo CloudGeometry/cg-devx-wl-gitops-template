@@ -5,5 +5,7 @@ kind: ConfigMap
 metadata:
   name: <WL_SERVICE_NAME>
   labels: {}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-5"
 data: {}
 

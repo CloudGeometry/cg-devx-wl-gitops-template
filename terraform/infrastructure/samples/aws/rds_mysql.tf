@@ -4,7 +4,7 @@
 module "db_mysql" {
   source = "terraform-aws-modules/rds/aws"
 
-  identifier = "<WL_NAME>-demodb"
+  identifier = "${local.wl_name}-demodb"
 
   engine            = "mysql"
   engine_version    = "8.0.33"
