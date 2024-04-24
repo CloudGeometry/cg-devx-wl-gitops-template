@@ -5,12 +5,14 @@ resources:
 - ../../base
 - ingress.yaml
 - cm.yaml
+- build-wow-semaphore-cm.yaml
 - external-secrets.yaml
 - argo-workflow-controller-secret-reader-wl.yaml
 - argo-workflow-cwft-wl-crb.yaml
 - external-secrets-wl.yaml
 - serviceaccount-wl.yaml
 - serviceaccount-argo-workflow-wl.yaml
+- wl-artifactory-cm.yaml
 
 components:
 - ../../variants/dev
@@ -19,3 +21,5 @@ patchesStrategicMerge:
 - deployment.yaml
 - version.yaml
 - settings.yaml
+- migrations.yaml
+- serviceaccount.yaml
