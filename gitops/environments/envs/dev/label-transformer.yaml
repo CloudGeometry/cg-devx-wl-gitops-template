@@ -2,9 +2,16 @@
 apiVersion: builtin
 kind: LabelTransformer
 metadata:
-  name: argocd-common-labels
+  name: <WL_NAME>-dev-labels
 labels:
-  cg-devx.cost-allocation.environment: dev
+  cg-devx.cost-allocation.workload: "<WL_NAME>"
+  cg-devx.cost-allocation.cost-center: "development"
+  cg-devx.metadata.owner: "<WL_NAME>-admins.<WL_NAME>-developers"
+  cg-devx.cost-allocation.environment: "dev"
 fieldSpecs:
 - path: metadata/labels
   create: true
+  kind: Deployment
+- path: spec/template/metadata/labels
+  create: true
+  kind: Deployment
