@@ -21,5 +21,3 @@ patchesStrategicMerge:
 - deployment.yaml
 - version.yaml
 - settings.yaml
-- migrations.yaml
-- serviceaccount.yaml

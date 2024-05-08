@@ -9,4 +9,4 @@ spec:
     spec:
       containers:
         - name: <WL_SERVICE_NAME>-container
-          image: <WL_SERVICE_IMAGE>
+          image: "<WL_SERVICE_IMAGE>:0.1.0"
