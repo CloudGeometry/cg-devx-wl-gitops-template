@@ -8,17 +8,18 @@ metadata:
     # <K8S_ROLE_MAPPING>: "<WL_IAM_ROLE_RN>"
     }
   labels: {
+    cg-devx.metadata.service: "<WL_SERVICE_NAME>-app"
     # <ADDITIONAL_LABELS>
     }
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: <WL_SERVICE_NAME>-app
+      "cg-devx.metadata.service": "<WL_SERVICE_NAME>-app"
   template:
     metadata:
       labels:
-        app: <WL_SERVICE_NAME>-app
+        "cg-devx.metadata.service": "<WL_SERVICE_NAME>-app"
     spec:
       serviceAccountName: <WL_SERVICE_NAME>
       imagePullSecrets:
