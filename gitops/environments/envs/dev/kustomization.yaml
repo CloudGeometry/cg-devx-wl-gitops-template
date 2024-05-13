@@ -8,7 +8,7 @@ resources:
 - build-wow-semaphore-cm.yaml
 - external-secrets.yaml
 - argo-workflow-controller-secret-reader-wl.yaml
-- argo-workflow-cwft-wl-crb.yaml
+- argo-workflow-cwft-wl-rb.yaml
 - external-secrets-wl.yaml
 - serviceaccount-wl.yaml
 - serviceaccount-argo-workflow-wl.yaml
