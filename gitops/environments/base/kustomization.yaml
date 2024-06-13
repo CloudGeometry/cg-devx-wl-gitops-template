@@ -6,4 +6,3 @@ resources:
 - service.yaml
 - serviceaccount.yaml
 - external-secrets-dockerconfig-wl.yaml
-

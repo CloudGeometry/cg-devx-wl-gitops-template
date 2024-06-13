@@ -21,3 +21,6 @@ patchesStrategicMerge:
 - deployment.yaml
 - version.yaml
 - settings.yaml
+
+transformers:
+  - label-transformer.yaml

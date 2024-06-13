@@ -7,13 +7,15 @@ terraform {
 # <TF_HOSTING_PROVIDER>
 
 locals {
-  region                       = "<CLOUD_REGION>"
-  wl_name                      = "<WL_NAME>"
-  domain_name                  = "<DOMAIN_NAME>"
-  cluster_name                 = "<CLUSTER_NAME>"
-  owner_email                  = "<OWNER_EMAIL>"
+  region       = "<CLOUD_REGION>"
+  wl_name      = "<WL_NAME>"
+  domain_name  = "<DOMAIN_NAME>"
+  cluster_name = "<CLUSTER_NAME>"
+  owner_email  = "<OWNER_EMAIL>"
   tags = {
-    Workload   = "<WL_NAME>"
-    ProvisionedBy = "CGDevX"
+    "cg-devx.cost-allocation.workload"    = "<WL_NAME>"
+    "cg-devx.cost-allocation.cost-center" = "development"
+    "cg-devx.metadata.owner"              = "<WL_NAME>-admins.<WL_NAME>-developers"
+    "provisioned-by"                      = "cg-devx"
   }
 }
