@@ -1,0 +1,11 @@
+---
+# This ConfigMap is used by the workflow to limit concurrent execution
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: build-wow-semaphore-cm
+  annotations:
+    argocd.argoproj.io/sync-wave: "-5"
+data:
+  wow: "4"
+

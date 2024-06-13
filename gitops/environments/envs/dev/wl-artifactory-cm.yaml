@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wl-artifactory-cm
+  annotations:
+    workflows.argoproj.io/default-artifact-repository: workload-artifact-repository
+    argocd.argoproj.io/sync-wave: "-5"
+data:
+  workload-artifact-repository: |
+    s3:
+      bucket: <CLOUD_BINARY_ARTIFACTS_STORE>
+      endpoint: s3.amazonaws.com
+      insecure: false
+      keyFormat: "{{workflow.parameters.workload-name}}/{{workflow.parameters.tag}}/{{pod.name}}/"
+      region: <CLOUD_REGION>
+      useSDKCreds: true
+      encryptionOptions:
+        enableEncryption: false
+  wl-pod-log-artifact-repository: |
+    s3:
+      bucket: <CLOUD_BINARY_ARTIFACTS_STORE>
+      endpoint: s3.amazonaws.com
+      insecure: false
+      keyFormat: "{{workflow.parameters.workload-name}}/{{workflow.parameters.tag}}/{{pod.name}}-log/"
+      region: <CLOUD_REGION>
+      useSDKCreds: true
+      encryptionOptions:
+        enableEncryption: false
