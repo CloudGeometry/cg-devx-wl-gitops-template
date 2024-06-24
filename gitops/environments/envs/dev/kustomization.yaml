@@ -9,8 +9,7 @@ resources:
 - argo-workflow-controller-secret-reader-wl.yaml
 - argo-workflow-cwft-wl-crb.yaml
 - external-secrets-wl.yaml
-- serviceaccount-wl.yaml
-- serviceaccount-argo-workflow-wl.yaml
+- argo-workflow-serviceaccount-wl.yaml
 
 components:
 - ../../variants/dev
