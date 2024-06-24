@@ -8,7 +8,7 @@ resources:
 - external-secrets.yaml
 
 components:
-- ../../variants/uat
+- ../../variants/dev
 
 patchesStrategicMerge:
 - deployment.yaml
