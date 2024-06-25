@@ -12,4 +12,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: argo-workflow
-    namespace: wl-<WL_NAME>-dev
+    namespace: wl-<WL_NAME>-build

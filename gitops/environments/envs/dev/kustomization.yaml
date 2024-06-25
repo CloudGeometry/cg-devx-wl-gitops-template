@@ -6,10 +6,6 @@ resources:
 - ingress.yaml
 - cm.yaml
 - external-secrets.yaml
-- argo-workflow-controller-secret-reader-wl.yaml
-- argo-workflow-cwft-wl-crb.yaml
-- external-secrets-wl.yaml
-- argo-workflow-serviceaccount-wl.yaml
 
 components:
 - ../../variants/dev
