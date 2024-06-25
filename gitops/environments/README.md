@@ -79,12 +79,7 @@ Workload-specific, this reference implementation should be updated accordingly.
     │   ├── kustomization.yaml
     │   ├── replicas.yaml # <= kuernetes settings replicas count
     │   └── settings.yaml # <= static settings
-    ├── prod
-    │   ├── kustomization.yaml
-    │   ├── prod.yaml # <= kuernetes settings
-    │   ├── replicas.yaml # <= kuernetes settings replicas count
-    │   └── settings.yaml # <= static settings
-    └── uat
+    └── live
         ├── kustomization.yaml
         ├── replicas.yaml # <= kuernetes settings replicas count
         ├── settings.yaml # <= static settings
