@@ -40,7 +40,7 @@ on:
         default: workload promotion
 env:
   REPO_NAME: ${{ github.repository }}
-  ARGO_NAMESPACE: wl-<WL_NAME>-dev
+  ARGO_NAMESPACE: wl-<WL_NAME>-build
 jobs:
   promote:
     # The type of runner that the job will run on
