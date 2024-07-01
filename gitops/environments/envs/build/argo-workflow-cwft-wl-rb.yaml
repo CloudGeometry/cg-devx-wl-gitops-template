@@ -3,7 +3,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: argo-workflow-cwft-<WL_NAME>-rb
-  namespace: wl-<WL_NAME>-dev
+  namespace: wl-<WL_NAME>-build
   annotations:
     argocd.argoproj.io/sync-wave: "-5"
 roleRef:
@@ -13,4 +13,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: argo-workflow
-    namespace: wl-<WL_NAME>-dev
+    namespace: wl-<WL_NAME>-build
