@@ -41,6 +41,7 @@ on:
 env:
   REPO_NAME: ${{ github.repository }}
   ARGO_NAMESPACE: wl-<WL_NAME>-build
+  ARGO_INSTANCEID: cgdevx
 jobs:
   promote:
     # The type of runner that the job will run on
@@ -59,7 +60,7 @@ jobs:
              gunzip argo-linux-amd64.gz
              chmod +x argo-linux-amd64
              sudo mv ./argo-linux-amd64 /usr/local/bin/argo
-             argo version          
+             argo version
       - name: argo run
         run: |-
           pwd
