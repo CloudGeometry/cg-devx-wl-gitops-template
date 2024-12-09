@@ -33,31 +33,28 @@ variables:
       - "false"
   COMMIT_MESSAGE: "workload promotion"
 
-stages:
-  - build
-  - deploy
+default:
+  image: ubuntu:latest
 
-build-argo-cli:
-  stage: build
+promote:
+  variables:
+    REPO_NAME: $CI_PROJECT_URL
+    ARGO_NAMESPACE: wl-alysenko-test-build
+    ARGO_INSTANCEID: cgdevx
   script: |
     # Download the binary
+    set -x
+    apt update
+    apt install -y curl
     curl -sLO https://github.com/argoproj/argo-workflows/releases/download/v3.5.2/argo-linux-amd64.gz
     gunzip argo-linux-amd64.gz
     chmod +x argo-linux-amd64
-    sudo mv ./argo-linux-amd64 /usr/local/bin/argo
+    mv ./argo-linux-amd64 /usr/local/bin/argo
     argo version
-
-run-argo-cli:
-  stage: deploy
-  variables:
-    REPO_NAME: $CI_PROJECT_NAME
-    ARGO_NAMESPACE: wl-<WL_NAME>-build
-    ARGO_INSTANCEID: cgdevx
-  script: |
     pwd
     ls -lar
     argo submit .argo/promote-wf.yaml \
-      -p repo=git@github.com:${REPO_NAME}.git \
+      -p repo=${REPO_NAME} \
       -p env-path="gitops/environments/envs" \
       -p source-env="${SOURCE_ENV}" \
       -p target-env="${TARGET_ENV}" \
@@ -67,3 +64,4 @@ run-argo-cli:
       -p commit-message=\""${COMMIT_MESSAGE}"\" \
       --serviceaccount argo-workflow \
       --wait --log
+  when: manual
