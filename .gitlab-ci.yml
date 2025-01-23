@@ -45,12 +45,18 @@ promote:
     # Download the binary
     set -x
     apt update
-    apt install -y curl
+    apt install -y curl git jq
     curl -sLO https://github.com/argoproj/argo-workflows/releases/download/v3.5.2/argo-linux-amd64.gz
     gunzip argo-linux-amd64.gz
     chmod +x argo-linux-amd64
     mv ./argo-linux-amd64 /usr/local/bin/argo
     argo version
+
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    chmod +x kubectl
+    mv kubectl /usr/local/bin/
+    kubectl config use-context cgdevx-gitlab-ci/cgdevx-gitlab:gl-test-agent
+
     pwd
     ls -lar
     argo submit .argo/promote-wf.yaml \
@@ -64,4 +70,5 @@ promote:
       -p commit-message=\""${COMMIT_MESSAGE}"\" \
       --serviceaccount argo-workflow \
       --wait --log
+      
   when: manual
