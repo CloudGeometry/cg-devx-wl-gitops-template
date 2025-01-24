@@ -39,7 +39,7 @@ default:
 promote:
   variables:
     REPO_NAME: $CI_PROJECT_URL
-    ARGO_NAMESPACE: wl-alysenko-test-build
+    ARGO_NAMESPACE: wl-<WL_NAME>-build
     ARGO_INSTANCEID: cgdevx
   script: |
     # Download the binary
