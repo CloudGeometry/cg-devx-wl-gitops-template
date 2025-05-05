@@ -38,7 +38,7 @@ default:
 
 promote:
   variables:
-    REPO: "git@gitlab.com:<GIT_ORGANIZATION_NAME>/<WL_REPO_NAME>.git"
+    REPO: "git@gitlab.com:<GIT_ORGANIZATION_NAME>/<WL_GITOPS_REPO_NAME>.git"
     ARGO_NAMESPACE: wl-<WL_NAME>-build
     ARGO_INSTANCEID: cgdevx
   script: |
