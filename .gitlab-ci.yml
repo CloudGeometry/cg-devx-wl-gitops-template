@@ -38,7 +38,7 @@ default:
 
 promote:
   variables:
-    REPO_NAME: $CI_PROJECT_URL
+    REPO: "git@gitlab.com:<GIT_ORGANIZATION_NAME>/<WL_REPO_NAME>.git"
     ARGO_NAMESPACE: wl-<WL_NAME>-build
     ARGO_INSTANCEID: cgdevx
   script: |
@@ -60,7 +60,7 @@ promote:
     pwd
     ls -lar
     argo submit .argo/promote-wf.yaml \
-      -p repo=${REPO_NAME} \
+      -p repo=${REPO} \
       -p env-path="gitops/environments/envs" \
       -p source-env="${SOURCE_ENV}" \
       -p target-env="${TARGET_ENV}" \
