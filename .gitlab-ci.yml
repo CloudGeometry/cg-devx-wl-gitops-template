@@ -1,0 +1,74 @@
+variables:
+  SOURCE_ENV:
+    description: "Source environment"
+    value: "dev"
+    options:
+      - "dev"
+      - "sta"
+      - "prod"
+  TARGET_ENV:
+    description: "Target environment"
+    value: "dev"
+    options:
+      - "dev"
+      - "sta"
+      - "prod"
+  PROMOTE_CONTAINER:
+    description: "Promote container tag"
+    value: "true"
+    options:
+      - "true"
+      - "false"
+  PROMOTE_CONFIGMAPS:
+    description: "Also promote configmap settings"
+    value: "true"
+    options: 
+      - "false"
+      - "true"
+  PROMOTE_SETTINGS:
+    description: "Also promote workload settings"
+    value: "false"
+    options:
+      - "true"
+      - "false"
+  COMMIT_MESSAGE: "workload promotion"
+
+default:
+  image: ubuntu:latest
+
+promote:
+  variables:
+    REPO: "git@gitlab.com:<GIT_ORGANIZATION_NAME>/<WL_GITOPS_REPO_NAME>.git"
+    ARGO_NAMESPACE: wl-<WL_NAME>-build
+    ARGO_INSTANCEID: cgdevx
+  script: |
+    # Download the binary
+    set -x
+    apt update
+    apt install -y curl git jq
+    curl -sLO https://github.com/argoproj/argo-workflows/releases/download/v3.5.2/argo-linux-amd64.gz
+    gunzip argo-linux-amd64.gz
+    chmod +x argo-linux-amd64
+    mv ./argo-linux-amd64 /usr/local/bin/argo
+    argo version
+
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    chmod +x kubectl
+    mv kubectl /usr/local/bin/
+    kubectl config use-context $(kubectl config get-contexts -o name | head -n 1)
+
+    pwd
+    ls -lar
+    argo submit .argo/promote-wf.yaml \
+      -p repo=${REPO} \
+      -p env-path="gitops/environments/envs" \
+      -p source-env="${SOURCE_ENV}" \
+      -p target-env="${TARGET_ENV}" \
+      -p promote-container=${PROMOTE_CONTAINER} \
+      -p promote-settings=${PROMOTE_SETTINGS} \
+      -p promote-configmaps=${PROMOTE_CONFIGMAPS} \
+      -p commit-message=\""${COMMIT_MESSAGE}"\" \
+      --serviceaccount argo-workflow \
+      --wait --log
+      
+  when: manual
