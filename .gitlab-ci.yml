@@ -1,38 +1,28 @@
-variables:
-  SOURCE_ENV:
-    description: "Source environment"
-    value: "dev"
-    options:
-      - "dev"
-      - "sta"
-      - "prod"
-  TARGET_ENV:
-    description: "Target environment"
-    value: "dev"
-    options:
-      - "dev"
-      - "sta"
-      - "prod"
-  PROMOTE_CONTAINER:
-    description: "Promote container tag"
-    value: "true"
-    options:
-      - "true"
-      - "false"
-  PROMOTE_CONFIGMAPS:
-    description: "Also promote configmap settings"
-    value: "true"
-    options: 
-      - "false"
-      - "true"
-  PROMOTE_SETTINGS:
-    description: "Also promote workload settings"
-    value: "false"
-    options:
-      - "true"
-      - "false"
-  COMMIT_MESSAGE: "workload promotion"
-
+spec:
+  inputs:
+    source-env:
+      description: "Source environment"
+      default: "dev"
+      options: ["dev", "sta", "prod"]
+    target-env:
+      description: "Target environment"
+      default: "sta"
+      options: ["dev", "sta", "prod"]
+    promote-containers:
+      description: "Promote container tag"
+      type: boolean
+      default: true
+    promote-configmaps:
+      description: "Also promote configmap settings"
+      type: boolean
+      default: false
+    promote-settings:
+      description: "Also promote workload settings"
+      type: boolean
+      default: false
+    commit-message:
+      default: "workload promotion"
+---
 default:
   image: ubuntu:latest
 
@@ -62,13 +52,13 @@ promote:
     argo submit .argo/promote-wf.yaml \
       -p repo=${REPO} \
       -p env-path="gitops/environments/envs" \
-      -p source-env="${SOURCE_ENV}" \
-      -p target-env="${TARGET_ENV}" \
-      -p promote-container=${PROMOTE_CONTAINER} \
-      -p promote-settings=${PROMOTE_SETTINGS} \
-      -p promote-configmaps=${PROMOTE_CONFIGMAPS} \
-      -p commit-message=\""${COMMIT_MESSAGE}"\" \
+      -p source-env="$[[ inputs.source-env ]]" \
+      -p target-env="$[[ inputs.target-env ]]" \
+      -p promote-container=$[[ inputs.promote-containers ]] \
+      -p promote-settings=$[[ inputs.promote-settings ]] \
+      -p promote-configmaps=$[[ inputs.promote-configmaps ]] \
+      -p commit-message=\""$[[ inputs.commit-message ]]"\" \
       --serviceaccount argo-workflow \
       --wait --log
-      
+
   when: manual
